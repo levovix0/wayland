@@ -23,7 +23,7 @@ type
   Surface* = ptr object
   Touch* = ptr object
 
-  DisplayError* {.size: sizeof(cint).} = enum
+  DisplayError* {.size: cint.sizeof.} = enum
     invalidObject
     invalidMethod
     noMemory
@@ -40,7 +40,7 @@ type
   CallbackListener* = object
     done*: proc(data: pointer, cb: Callback, callbackData: uint32) {.cdecl.}
 
-  ShmError* {.size: sizeof(cint).} = enum
+  ShmError* {.size: cint.sizeof.} = enum
     invalidFormat
     invalidStride
     invalidFd
@@ -51,7 +51,7 @@ type
   BufferListener* = object
     release*: proc(data: pointer, buf: Buffer) {.cdecl.}
 
-  DataOfferError* {.size: sizeof(cint).} = enum
+  DataOfferError* {.size: cint.sizeof.} = enum
     invalidFinish
     invalidActionMask
     invalidAction
@@ -86,7 +86,7 @@ var
   wl_subcompositor_interface* {.importc.}: Interface
   wl_subsurface_interface* {.importc.}: Interface
 
-proc addListener*(d: Display, listener: ptr DisplayListener, data: pointer): cint {.inline.} =
+proc addListener*(d: Display, listener: ptr DisplayListener, data: pointer): cint {.inline, discardable.} =
   cast[Proxy](d).addListener(listener, data)
 
 const
@@ -107,7 +107,7 @@ proc sync*(d: Display): Callback {.inline.} =
 proc getRegistry*(d: Display): Registry {.inline.} =
   cast[Registry](cast[Proxy](d).marshalConstructor(WL_DISPLAY_GET_REGISTRY, addr wl_registry_interface, nil))
 
-proc addListener*(reg: Registry, listener: ptr RegistryListener, data: pointer): cint {.inline.} =
+proc addListener*(reg: Registry, listener: ptr RegistryListener, data: pointer): cint {.inline, discardable.} =
   cast[Proxy](reg).addListener(listener, data)
 
 const

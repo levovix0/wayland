@@ -22,10 +22,10 @@ proc marshalConstructorVersioned*(proxy: Proxy, opcode: uint32, args: ptr Argume
 
 proc destroy*(proxy: Proxy) {.importc: "wl_proxy_destroy".}
 
-proc addListener*(proxy: Proxy, implementation: pointer, data: pointer): cint {.importc: "wl_proxy_add_listener".}
+proc addListener*(proxy: Proxy, implementation: pointer, data: pointer): cint {.importc: "wl_proxy_add_listener", discardable.}
 proc getListener*(proxy: Proxy): pointer {.importc: "wl_proxy_get_listener".}
 
-proc addDispatcher*(proxy: Proxy, f: DispatcherFunc, dispData, data: pointer): cint {.importc: "wl_proxy_add_dispatcher".}
+proc addDispatcher*(proxy: Proxy, f: DispatcherFunc, dispData, data: pointer): cint {.importc: "wl_proxy_add_dispatcher", discardable.}
 
 proc setUserData*(proxy: Proxy, data: pointer) {.importc: "wl_proxy_set_user_data".}
 proc getUserData*(proxy: Proxy): pointer {.importc: "wl_proxy_get_user_data".}
@@ -37,29 +37,29 @@ proc getClass*(proxy: Proxy): cstring {.importc: "wl_proxy_get_class".}
 proc setQueue*(proxy: Proxy, queue: EventQueue): cstring {.importc: "wl_proxy_set_queue".}
 
 
-proc displayConnect*(name: cstring): Display {.importc: "wl_display_connect".}
+proc displayConnect*(name: cstring = nil): Display {.importc: "wl_display_connect".}
 proc displayConnect*(fd: cint): Display {.importc: "wl_display_connect_to_fd".}
 proc disconnect*(d: Display) {.importc: "wl_display_disconnect".}
-proc getFd*(d: Display): cint {.importc: "wl_display_get_fd".}
-proc dispatch*(d: Display): cint {.importc: "wl_display_dispatch".}
-proc dispatchQueue*(d: Display, q: EventQueue): cint {.importc: "wl_display_dispatch_queue".}
-proc dispatchQueuePending*(d: Display, q: EventQueue): cint {.importc: "wl_display_dispatch_queue_pending".}
-proc dispatchPending*(d: Display): cint {.importc: "wl_display_dispatch_pending".}
+proc getFd*(d: Display): cint {.importc: "wl_display_get_fd", discardable.}
+proc dispatch*(d: Display): cint {.importc: "wl_display_dispatch", discardable.}
+proc dispatchQueue*(d: Display, q: EventQueue): cint {.importc: "wl_display_dispatch_queue", discardable.}
+proc dispatchQueuePending*(d: Display, q: EventQueue): cint {.importc: "wl_display_dispatch_queue_pending", discardable.}
+proc dispatchPending*(d: Display): cint {.importc: "wl_display_dispatch_pending", discardable.}
 proc getError*(d: Display): cint {.importc: "wl_display_get_error".}
 
 proc getProtocolError*(d: Display, iface: ptr ptr Interface, id: ptr uint32): uint32 {.importc: "wl_display_get_protocol_error".}
 
-proc flush*(d: Display): cint {.importc: "wl_display_flush".}
+proc flush*(d: Display): cint {.importc: "wl_display_flush", discardable.}
 
-proc roundtripQueue*(d: Display, q: EventQueue): cint {.importc: "wl_display_roundtrip_queue".}
-proc roundtrip*(d: Display): cint {.importc: "wl_display_roundtrip".}
+proc roundtripQueue*(d: Display, q: EventQueue): cint {.importc: "wl_display_roundtrip_queue", discardable.}
+proc roundtrip*(d: Display): cint {.importc: "wl_display_roundtrip", discardable.}
 
 proc createQueue*(d: Display): EventQueue {.importc: "wl_display_create_queue".}
 
-proc prepareReadQueue*(d: Display, q: EventQueue): cint {.importc: "wl_display_prepare_read_queue".}
+proc prepareReadQueue*(d: Display, q: EventQueue): cint {.importc: "wl_display_prepare_read_queue", discardable.}
 
-proc prepareRead*(d: Display): cint {.importc: "wl_display_prepare_read".}
-proc cancelRead*(d: Display): cint {.importc: "wl_display_cancel_read".}
-proc readEvents*(d: Display): cint {.importc: "wl_display_read_events".}
+proc prepareRead*(d: Display): cint {.importc: "wl_display_prepare_read", discardable.}
+proc cancelRead*(d: Display): cint {.importc: "wl_display_cancel_read", discardable.}
+proc readEvents*(d: Display): cint {.importc: "wl_display_read_events", discardable.}
 
 proc setLogHandler*(handler: pointer) {.importc: "wl_log_set_handler_client".}
