@@ -7,9 +7,9 @@
 
 import unittest
 
-import wayland/[client, util]
+import wayland/client
 
-proc test() =
+test "":
   let disp = displayConnect(nil)
   if disp.isNil:
     echo "Could not connect to wayland display"

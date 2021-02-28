@@ -63,28 +63,28 @@ type
     action*: proc(data: pointer, dataOffer: DataOffer, dndAction: uint32) {.cdecl.}
   
 var
-  wl_display_interface {.importc.}: Interface
-  wl_registry_interface {.importc.}: Interface
-  wl_callback_interface {.importc.}: Interface
-  wl_compositor_interface {.importc.}: Interface
-  wl_shm_pool_interface {.importc.}: Interface
-  wl_shm_interface {.importc.}: Interface
-  wl_buffer_interface {.importc.}: Interface
-  wl_data_offer_interface {.importc.}: Interface
-  wl_data_source_interface {.importc.}: Interface
-  wl_data_device_interface {.importc.}: Interface
-  wl_data_device_manager_interface {.importc.}: Interface
-  wl_shell_interface {.importc.}: Interface
-  wl_shell_surface_interface {.importc.}: Interface
-  wl_surface_interface {.importc.}: Interface
-  wl_seat_interface {.importc.}: Interface
-  wl_pointer_interface {.importc.}: Interface
-  wl_keyboard_interface {.importc.}: Interface
-  wl_touch_interface {.importc.}: Interface
-  wl_output_interface {.importc.}: Interface
-  wl_region_interface {.importc.}: Interface
-  wl_subcompositor_interface {.importc.}: Interface
-  wl_subsurface_interface {.importc.}: Interface
+  wl_display_interface* {.importc.}: Interface
+  wl_registry_interface* {.importc.}: Interface
+  wl_callback_interface* {.importc.}: Interface
+  wl_compositor_interface* {.importc.}: Interface
+  wl_shm_pool_interface* {.importc.}: Interface
+  wl_shm_interface* {.importc.}: Interface
+  wl_buffer_interface* {.importc.}: Interface
+  wl_data_offer_interface* {.importc.}: Interface
+  wl_data_source_interface* {.importc.}: Interface
+  wl_data_device_interface* {.importc.}: Interface
+  wl_data_device_manager_interface* {.importc.}: Interface
+  wl_shell_interface* {.importc.}: Interface
+  wl_shell_surface_interface* {.importc.}: Interface
+  wl_surface_interface* {.importc.}: Interface
+  wl_seat_interface* {.importc.}: Interface
+  wl_pointer_interface* {.importc.}: Interface
+  wl_keyboard_interface* {.importc.}: Interface
+  wl_touch_interface* {.importc.}: Interface
+  wl_output_interface* {.importc.}: Interface
+  wl_region_interface* {.importc.}: Interface
+  wl_subcompositor_interface* {.importc.}: Interface
+  wl_subsurface_interface* {.importc.}: Interface
 
 proc addListener*(d: Display, listener: ptr DisplayListener, data: pointer): cint {.inline.} =
   cast[Proxy](d).addListener(listener, data)

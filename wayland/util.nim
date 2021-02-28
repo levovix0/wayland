@@ -16,11 +16,11 @@ type
   Fixed* = distinct int32
   Object* = ptr object
   Array* = object
-    size*: csize
-    alloc*: csize
+    size*: csize_t
+    alloc*: csize_t
     data*: pointer
 
-  Argument* = object {.union.}
+  Argument* {.union.} = object
     i*: int32
     u*: uint32
     f*: Fixed
